@@ -10,6 +10,24 @@ function App() {
     projects: [],
   });
 
+  function addTask(text) {
+    console.log(text);
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        projects: prevState.projects.map((project) => {
+          if (project.id === projectState.selectedProjectId) {
+            return {
+              ...project,
+              tasks: [...project.tasks, text],
+            };
+          }
+          return project;
+        }),
+      }
+    });
+  }
+
   function handleAddProject() {
     setProjectState((prevState) => {
       return {
@@ -51,12 +69,16 @@ function App() {
   }
 
 
+  
+
+
+
   const selectedProject = projectState.projects.find((project) => {
     return project.id == projectState.selectedProjectId;
   });
   
 
-  let content = <SelectedProject project={selectedProject} onDeleteProject={handleDeleteProject} />;
+  let content = <SelectedProject project={selectedProject} onDeleteProject={handleDeleteProject} onAddTask={addTask} />;
   if (projectState.selectedProjectId === null) {
     content = (
       <NewProject

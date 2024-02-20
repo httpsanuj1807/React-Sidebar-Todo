@@ -25,6 +25,7 @@ function NewProject({onSaveProject,onCancelProject}){
             title : projectTitle,
             description : projectDescription,
             dueDate : projectDueDate,
+            tasks : []
         }
         onSaveProject(projectData);
     }
