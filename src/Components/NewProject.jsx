@@ -13,7 +13,7 @@ function NewProject({onSaveProject,onCancelProject}){
     function handleSave(){
         let projectTitle = title.current.value;
         let projectDescription = description.current.value;
-        let projectDueDate = title.current.value;
+        let projectDueDate = dueDate.current.value;
 
         // validation....
         if(projectTitle.trim() === '' || projectDescription.trim() === '' || projectDueDate.trim() === ''){
