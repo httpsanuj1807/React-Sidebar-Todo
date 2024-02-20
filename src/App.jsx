@@ -18,6 +18,15 @@ function App() {
 
     })
   }
+
+  function handleCancelAddProject(){
+    setProjectState((prevState)=>{
+      return {
+        ...prevState,
+        selectedProjectId : undefined,
+      }
+    })
+  }
   
   function handleSaveProject(projectData){
     const newProject ={
@@ -35,14 +44,14 @@ function App() {
 
   let content; 
   if(projectState.selectedProjectId === null){
-    content = <NewProject onSaveProject={handleSaveProject}/>
+    content = <NewProject onSaveProject={handleSaveProject} onCancelProject={handleCancelAddProject}/>
   }
   else if(projectState.selectedProjectId === undefined){
     content =  <NoProjectSelected onAddProject={handleAddProject} />
   }
   
   return (
-    <main className="h-screen my-8 flex gap-8">
+    <main className="h-screen flex gap-8">
     <ProjectSidebar onAddProject={handleAddProject} projects={projectState.projects} />
     {content}
     </main>
