@@ -2,7 +2,7 @@ import NewTasks from "./NewTask";
 import { useRef } from "react";
 import Modal from "./Modal";
 
-function Tasks({onAddTask,project}) {
+function Tasks({onAddTask,project, deleteTask}) {
   const modal = useRef();  
   function showErrorMessage() {
     modal.current.open();
@@ -30,7 +30,9 @@ function Tasks({onAddTask,project}) {
           {project.tasks.map((task, index) => {
             return <li key={index} className="flex justify-between my-4">
             <span>{task}</span>
-            <button className="text-stone-700 hover:text-red-500">Clear</button>
+            <button onClick={()=>{
+              deleteTask(index,project)
+            }} className="text-stone-700 hover:text-red-500">Clear</button>
             </li>;
           })}
         </ul>

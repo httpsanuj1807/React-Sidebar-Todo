@@ -10,8 +10,9 @@ function App() {
     projects: [],
   });
 
+  
+
   function addTask(text) {
-    console.log(text);
     setProjectState((prevState) => {
       return {
         ...prevState,
@@ -27,6 +28,28 @@ function App() {
       }
     });
   }
+
+  function deleteTask(taskIndex, project){
+
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        projects: prevState.projects.map((project) => {
+          if (project.id === projectState.selectedProjectId) {
+            return {
+              ...project,
+              tasks: project.tasks.filter((task, index)=>{
+                return index != taskIndex
+              }),
+            };
+          }
+          return project;
+        }),
+      }
+    });
+  }
+
+  
 
   function handleAddProject() {
     setProjectState((prevState) => {
@@ -78,7 +101,7 @@ function App() {
   });
   
 
-  let content = <SelectedProject project={selectedProject} onDeleteProject={handleDeleteProject} onAddTask={addTask} />;
+  let content = <SelectedProject project={selectedProject} onDeleteProject={handleDeleteProject} onAddTask={addTask} deleteTask={deleteTask} />;
   if (projectState.selectedProjectId === null) {
     content = (
       <NewProject
